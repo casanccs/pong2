@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://b611iv5o5h560"]
+
+[ext_resource type="Script" path="res://Player1.gd" id="1_8v6bp"]
+[ext_resource type="Script" path="res://world.gd" id="1_oobsx"]
+[ext_resource type="Script" path="res://Player2.gd" id="2_3qd60"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwsla"]
+size = Vector2(9, 84)
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_oobsx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 853.0
+offset_bottom = 444.0
+color = Color(0, 1, 1, 1)
+
+[node name="Player1" type="CharacterBody2D" parent="."]
+position = Vector2(50, 200)
+script = ExtResource("1_8v6bp")
+
+[node name="ColorRect" type="ColorRect" parent="Player1"]
+offset_left = 1.0
+offset_top = -16.0
+offset_right = 10.0
+offset_bottom = 68.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
+position = Vector2(5.5, 26)
+shape = SubResource("RectangleShape2D_uwsla")
+
+[node name="Player2" type="CharacterBody2D" parent="."]
+position = Vector2(750, 200)
+script = ExtResource("2_3qd60")
+
+[node name="ColorRect" type="ColorRect" parent="Player2"]
+offset_left = 1.0
+offset_top = -16.0
+offset_right = 10.0
+offset_bottom = 68.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
+position = Vector2(5.5, 26)
+shape = SubResource("RectangleShape2D_uwsla")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
